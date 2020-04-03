@@ -8,31 +8,41 @@ namespace RegisterAPI.Controllers
     using Microsoft.Extensions.Logging;
     using RegisterAPI.Abstract;
     using RegisterAPI.Models;
+    using System;
 
     [ApiController]
     [Route("[controller]")]
     public class RegisterController : ControllerBase
     {
-        private readonly ILogger<RegisterController> _logger;
-        private readonly IRepository _repository;
+        private ILogger<RegisterController> logger;
+        private IRepository repository;
         public RegisterController(ILogger<RegisterController> logger, IRepository repo)
         {
-            _logger = logger;
-            _repository = repo;
+            this.logger = logger;
+            this.repository = repo;
         }
 
         [HttpGet]
         public string Get()
         {
-            _logger.LogInformation("RegisterAPI is running. Get()");
+            logger.LogInformation("RegisterAPI is running. Get()");
             return "Im up";
         }
 
         [HttpPost]
-        public RegisterResponse Post(UserProfile profile)
+        //[Route("RegisterAPI/register")]
+        public IActionResult Post(UserProfile profile)
         {
-            _logger.LogInformation("Saving Profile");
-            return _repository.RegisterUserProfile(profile);
+            logger.LogInformation("Saving Profile");
+            try
+            {
+                return Ok(repository.RegisterUserProfile(profile));
+            }
+            catch(Exception ex)
+            {
+                logger.LogError(ex.Message);
+                throw;
+            }
         }
     }
 }

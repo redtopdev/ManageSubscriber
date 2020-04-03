@@ -16,11 +16,11 @@ namespace RegisterAPI.BL
         /// <summary>
         /// DB Handler
         /// </summary>
-        private readonly IDataAccess _db;
+        private readonly IDataAccess db;
         /// <summary>
         /// 
         /// </summary>
-        private readonly ILogger<RegisterRepository> _logger;
+        private readonly ILogger<RegisterRepository> logger;
 
         /// <summary>
         /// 
@@ -28,8 +28,8 @@ namespace RegisterAPI.BL
         /// <param name="db"></param>
         public RegisterRepository(IDataAccess db, ILogger<RegisterRepository> logger )
         {
-            _db = db;
-            _logger = logger;
+            this.db = db;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -39,9 +39,9 @@ namespace RegisterAPI.BL
         /// <returns></returns>
         public RegisterResponse RegisterUserProfile(UserProfile profile)
         {
-            _logger.LogInformation("Register repo - Saving Profile.");
+            logger.LogInformation("Register repo - Saving Profile.");
             RegisterResponse response = new RegisterResponse();
-            response.UserId =   _db.SaveProfile(profile);            
+            response.UserId =   db.SaveProfile(profile);            
             return response;
         }
     }
