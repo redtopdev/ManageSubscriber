@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Register.DataPersistance</AssemblyName>
+    <RootNamespace>Register.DataManager</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Engaze.Core.Persistance.Cassandra" Version="1.0.5-alpha" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataContract\DataContract.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,20 +1,16 @@
 /// <summary>
 /// Developer: ShyamSk
 /// </summary>
-namespace RegisterAPI
+namespace Register.Service
 {
+    using Engaze.Core.Persistance.Cassandra;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using RegisterAPI.Abstract;
-    using RegisterAPI.BL;
-    using RegisterAPI.DataAccess;
+    using Register.DataManager;
     using Serilog;
-    using Engaze.Core.Persistance.Cassandra;
-    using Engaze.Core.Persistance.Cassandra.Abstract;
-    using RegisterAPI.Middleware;
 
     public class Startup
     {
@@ -29,10 +25,10 @@ namespace RegisterAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient<ISessionManager, CassandraSessionCacheManager>();
-            services.AddTransient<IRepository, RegisterRepository>();
-            services.AddTransient<IDataAccess, CassandraRepository>();
-            services.ConfigureCassandraServices(Configuration);
+            services.ConfigureCassandraServices(Configuration);                     
+            services.AddTransient<IProfileManager, ProfileManager>();
+            services.AddTransient<IRepository, CassandraRepository>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
