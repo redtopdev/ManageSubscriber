@@ -4,14 +4,11 @@
 
 namespace Register.DataManager
 {
-    using System;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
-
     using Engaze.Core.Persistance.Cassandra;
-  
+    using Microsoft.Extensions.Logging;
     using Register.DataContract;
-    
+    using System;
+
 
     /// <summary>
     /// Cassandra DB Handler
@@ -19,7 +16,6 @@ namespace Register.DataManager
     public class CassandraRepository : IRepository
     {
         private readonly ILogger<CassandraRepository> logger;
-        private IConfiguration configuration;
         private CassandraSessionCacheManager sessionCacheManager;
         private string keySpace;
 
