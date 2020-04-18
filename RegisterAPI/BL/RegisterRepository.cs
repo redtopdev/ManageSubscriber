@@ -37,12 +37,9 @@ namespace RegisterAPI.BL
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public RegisterResponse RegisterUserProfile(UserProfile profile)
+        public Guid RegisterUserProfile(UserProfile profile)
         {
-            logger.LogInformation("Register repo - Saving Profile.");
-            RegisterResponse response = new RegisterResponse();
-            response.UserId =   db.SaveProfile(profile);            
-            return response;
+            return db.SaveProfile(profile);     
         }
     }
 }

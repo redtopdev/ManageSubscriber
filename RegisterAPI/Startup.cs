@@ -14,6 +14,7 @@ namespace RegisterAPI
     using Serilog;
     using Engaze.Core.Persistance.Cassandra;
     using Engaze.Core.Persistance.Cassandra.Abstract;
+    using RegisterAPI.Middleware;
 
     public class Startup
     {
@@ -42,7 +43,7 @@ namespace RegisterAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseSerilogRequestLogging();
 
@@ -50,10 +51,15 @@ namespace RegisterAPI
 
             app.UseAuthorization();
 
+            app.UseAppException();
+            app.UseAppStatus();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+            //app.Use)
         }
     }
 }

@@ -9,9 +9,10 @@ namespace RegisterAPI.Controllers
     using RegisterAPI.Abstract;
     using RegisterAPI.Models;
     using System;
+    using System.Data;
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("register")]
     public class RegisterController : ControllerBase
     {
         private ILogger<RegisterController> logger;
@@ -22,15 +23,14 @@ namespace RegisterAPI.Controllers
             this.repository = repo;
         }
 
-        [HttpGet]
-        public string Get()
+        public IActionResult CheckStatus()
         {
-            logger.LogInformation("RegisterAPI is running. Get()");
-            return "Im up";
+            Exception ex= new Exception("server error");
+            throw ex;
         }
 
-        [HttpPost]
-        //[Route("RegisterAPI/register")]
+
+        [HttpPost]       
         public IActionResult Post(UserProfile profile)
         {
             logger.LogInformation("Saving Profile");

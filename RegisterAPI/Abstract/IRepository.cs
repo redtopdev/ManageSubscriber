@@ -4,6 +4,7 @@
 namespace RegisterAPI.Abstract
 {
     using RegisterAPI.Models;
+    using System;
 
     /// <summary>
     /// Abstract Repo (BL)
@@ -14,7 +15,7 @@ namespace RegisterAPI.Abstract
         /// Register User Profile
         /// </summary>
         /// <param name="profile"></param>
-        /// <returns></returns>
-        RegisterResponse RegisterUserProfile(UserProfile profile);
+        /// <returns>user Id</returns>
+        Guid RegisterUserProfile(UserProfile profile);
     }
 }
