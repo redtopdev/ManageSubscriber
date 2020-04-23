@@ -23,8 +23,7 @@ namespace Register.Service.Controllers
             this.contactsManager = contactsManager;
         }
 
-        [HttpPost]
-        public IActionResult Post(ContactsRequest request)
+        public IActionResult Get(ContactsRequest request)
         {
             logger.LogInformation("Fetching Registered Contacts");
 
