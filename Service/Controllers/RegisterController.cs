@@ -22,13 +22,6 @@ namespace Register.Service
             this.profileManager = profileManager;
         }
 
-        public IActionResult CheckStatus()
-        {
-            Exception ex = new Exception("server error");
-            throw ex;
-        }
-
-
         [HttpPost]
         public IActionResult Post(UserProfile profile)
         {

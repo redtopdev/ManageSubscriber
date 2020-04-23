@@ -8,6 +8,7 @@ namespace Register.DataManager
     using Microsoft.Extensions.Logging;
     using Register.DataContract;
     using System;
+    using System.Collections.Generic;
 
 
     /// <summary>
@@ -19,7 +20,7 @@ namespace Register.DataManager
         private CassandraSessionCacheManager sessionCacheManager;
         private string keySpace;
 
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -48,7 +49,7 @@ namespace Register.DataManager
                 var session = sessionCacheManager.GetSession(keySpace);
                 var preparedStatement = session.Prepare(CassandraDML.InsertStatement);
                 var statement = preparedStatement.Bind(userId, profile.GCMClientId, profile.ProfileName,
-                    profile.ImageUrl,profile.CountryCode, profile.MobileNumber, profile.IsDeleted, 
+                    profile.ImageUrl, profile.CountryCode, profile.MobileNumber, profile.IsDeleted,
                     profile.CreatedOn);
 
                 session.Execute(statement);
@@ -57,7 +58,46 @@ namespace Register.DataManager
             }
             catch (Exception ex)
             {
-                logger.LogError( "Saving profile failed. Exception " + ex.ToString());
+                logger.LogError("Saving profile failed. Exception " + ex.ToString());
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Saves User Profile
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <returns></returns>
+        public List<PhoneContact> GetRegisteredUsers()
+        {
+            logger.LogInformation("Cassandra - Fetching Registered Users ..");
+            Guid userId = Guid.NewGuid();
+            List<PhoneContact> pcList = new List<PhoneContact>();
+            try
+            {
+                var session = sessionCacheManager.GetSession(keySpace);
+                var preparedStatement = session.Prepare(CassandraDML.SelectAllUserProfiles);
+                //var statement = preparedStatement.Bind(userId, profile.GCMClientId, profile.ProfileName,
+                //    profile.ImageUrl, profile.CountryCode, profile.MobileNumber, profile.IsDeleted,
+                //    profile.CreatedOn);
+
+                var resultSet = session.Execute(preparedStatement.Bind());
+
+                logger.LogInformation("Found results.");
+                foreach (var res in resultSet)
+                {
+                    pcList.Add(new PhoneContact()
+                    {
+                        UserId = res.GetValue<System.Guid>("userid"),
+                        CountryCode = res.GetValue<string>("countrycode"),
+                        MobileNumber = res.GetValue<ulong>("mobilenumber")
+                    });
+                }
+                return pcList;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Saving profile failed. Exception " + ex.ToString());
                 throw;
             }
         }

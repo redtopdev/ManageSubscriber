@@ -11,5 +11,9 @@ namespace Register.DataManager
                     "CountryCode, MobileNumber, IsDeleted, CreatedOn) " +
             "values " +
             "(?,?,?,?,?,?,?,?);";
+
+        internal static string SelectAllUserProfiles = "SELECT UserId, CountryCode, MobileNumber from userprofile";
     }
+
+
 }
