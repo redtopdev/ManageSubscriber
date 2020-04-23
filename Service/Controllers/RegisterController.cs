@@ -11,7 +11,7 @@ namespace Register.Service
     using System.Data;
 
     [ApiController]
-    [Route("register")]
+    [Route("user/register")]
     public class RegisterController : ControllerBase
     {
         private ILogger<RegisterController> logger;

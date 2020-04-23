@@ -10,7 +10,7 @@ using Register.DataContract;
 namespace Register.Service.Controllers
 {
 
-    [Route("registeredcontacts")]
+    [Route("user/registeredcontacts")]
     [ApiController]
     public class ContactsController : ControllerBase
     {
