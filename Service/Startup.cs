@@ -27,6 +27,7 @@ namespace Register.Service
             services.AddControllers();
             services.ConfigureCassandraServices(Configuration);                     
             services.AddTransient<IProfileManager, ProfileManager>();
+            services.AddTransient<IContactsManager, ContactsManager>();
             services.AddTransient<IRepository, CassandraRepository>();
             
         }
