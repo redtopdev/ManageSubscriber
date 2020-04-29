@@ -39,23 +39,30 @@ namespace Register.Service
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        private PhoneContact ParseNumber(string number, string requestorCountryCode)
+        public static PhoneContact ParseNumber(string number, string requestorCountryCode)
         {
-            var phoneNumberUtil = PhoneNumberUtil.GetInstance();
-            int countryCode = phoneNumberUtil.MaybeExtractCountryCode(number, null, new StringBuilder(number), true, new PhoneNumber.Builder());
-           
-            if (countryCode == 0)
+            PhoneContact pc = new PhoneContact();
+            pc.MobileNumberStoredInRequestorPhone = number;
+            try
             {
-                countryCode = int.Parse(requestorCountryCode.Split("+", StringSplitOptions.None)[1]);
+                var phoneNumberUtil = PhoneNumbers.PhoneNumberUtil.GetInstance();
+                int countryCode = phoneNumberUtil.MaybeExtractCountryCode(number, null, new StringBuilder(number), true, new PhoneNumber.Builder());
+                string region = "IN";
+                if (countryCode == 0)
+                {
+                    countryCode = int.Parse(requestorCountryCode.Split("+", StringSplitOptions.None)[1]);
+                }
+                region = phoneNumberUtil.GetRegionCodeForCountryCode(countryCode);
+                var phoneNumber = phoneNumberUtil.Parse(number, region);
+                
+                pc.CountryCode = "+" + phoneNumber.CountryCode.ToString();
+                pc.MobileNumber = phoneNumber.NationalNumber.ToString();
+
+            } 
+            catch 
+            { 
             }
-            string region = phoneNumberUtil.GetRegionCodeForCountryCode(countryCode);
-            var phoneNumber = phoneNumberUtil.Parse(number, region);
-            return new PhoneContact()
-            {
-                CountryCode = "+" + phoneNumber.CountryCode.ToString(),
-                MobileNumber = phoneNumber.NationalNumber,
-                MobileNumberStoredInRequestorPhone = number
-            };           
+            return pc;
         }
     }
 }

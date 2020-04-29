@@ -90,7 +90,7 @@ namespace Register.DataManager
                     {
                         UserId = res.GetValue<System.Guid>("userid"),
                         CountryCode = res.GetValue<string>("countrycode"),
-                        MobileNumber = res.GetValue<ulong>("mobilenumber")
+                        MobileNumber = res.GetValue<string>("mobilenumber")
                     });
                 }
                 return pcList;
