@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Register.DataContract;
 
@@ -23,8 +18,8 @@ namespace Register.Service.Controllers
             this.contactsManager = contactsManager;
         }
 
-        [HttpPost]
-        public IActionResult Post(ContactsRequest request)
+        [HttpGet]
+        public IActionResult Get(ContactsRequest request)
         {
             logger.LogInformation("Fetching Registered Contacts");
 
