@@ -9,14 +9,16 @@ namespace Subscriber.DataPersistance
     using Subscriber.DataContract;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
 
     /// <summary>
     /// Cassandra DB Handler
     /// </summary>
-    public class CassandraRepository : IRepository
+    public class UserProfileRepository : IUserProfileRepository
     {
-        private readonly ILogger<CassandraRepository> logger;
+        private readonly ILogger<UserProfileRepository> logger;
         private CassandraSessionCacheManager sessionCacheManager;
         private string keySpace;
 
@@ -27,7 +29,7 @@ namespace Subscriber.DataPersistance
         /// <param name="sessionCacheManager"></param>
         /// <param name="cassandrConfig"></param>
         /// <param name="logger"></param>
-        public CassandraRepository(CassandraSessionCacheManager sessionCacheManager, CassandraConfiguration cassandrConfig, ILogger<CassandraRepository> logger)
+        public UserProfileRepository(CassandraSessionCacheManager sessionCacheManager, CassandraConfiguration cassandrConfig, ILogger<UserProfileRepository> logger)
         {
             this.sessionCacheManager = sessionCacheManager;
             this.keySpace = cassandrConfig.KeySpace;
@@ -40,7 +42,7 @@ namespace Subscriber.DataPersistance
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public Guid SaveProfile(UserProfile profile)
+        public async Task<Guid> SaveProfile(UserProfile profile)
         {
             logger.LogInformation("Cassandra - Inserting profile ....");
             Guid userId = Guid.NewGuid();
@@ -52,7 +54,7 @@ namespace Subscriber.DataPersistance
                     profile.ImageUrl, profile.CountryCode, profile.MobileNumber, profile.IsDeleted,
                     profile.CreatedOn);
 
-                session.Execute(statement);
+                await session.ExecuteAsync(statement);
                 logger.LogInformation("Cassandra - Profile Saved....");
                 return userId;
             }
@@ -68,7 +70,7 @@ namespace Subscriber.DataPersistance
         /// </summary>
         /// <param name="profile"></param>
         /// <returns></returns>
-        public List<PhoneContact> GetRegisteredUsers()
+        public async Task<List<PhoneContact>> GetRegisteredUsers()
         {
             logger.LogInformation("Cassandra - Fetching Registered Users ..");
             Guid userId = Guid.NewGuid();
@@ -81,7 +83,7 @@ namespace Subscriber.DataPersistance
                 //    profile.ImageUrl, profile.CountryCode, profile.MobileNumber, profile.IsDeleted,
                 //    profile.CreatedOn);
 
-                var resultSet = session.Execute(preparedStatement.Bind());
+                var resultSet = await session.ExecuteAsync(preparedStatement.Bind());
 
                 logger.LogInformation("Found results.");
                 foreach (var res in resultSet)
@@ -94,6 +96,29 @@ namespace Subscriber.DataPersistance
                     });
                 }
                 return pcList;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError("Saving profile failed. Exception " + ex.ToString());
+                throw;
+            }
+        }
+
+        public async Task<Dictionary<Guid, string>> GetGCMClientIds(IEnumerable<Guid> userIds)
+        {
+            logger.LogInformation("Cassandra - Fetching Gcm Client Ids ..");
+            Guid userId = Guid.NewGuid();
+            Dictionary<Guid, string> result = new Dictionary<Guid, string>();
+            try
+            {
+                var session = sessionCacheManager.GetSession(keySpace);
+                var preparedStatement = session.Prepare(string.Format(CassandraDML.selectGcmClientIdsByUserIds, string.Join(',', userIds)));
+
+                var resultSet = await session.ExecuteAsync(preparedStatement.Bind());
+
+                logger.LogInformation("Found results.");
+                resultSet.ToList().ForEach(res => result.Add(res.GetValue<System.Guid>("userid"), res.GetValue<string>("gcmclientid")));
+                return result;
             }
             catch (Exception ex)
             {

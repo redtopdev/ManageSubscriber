@@ -1,6 +1,7 @@
 ﻿using Subscriber.DataContract;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Subscriber.Service
 {
@@ -11,7 +12,7 @@ namespace Subscriber.Service
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        IEnumerable<RegisteredContact> GetRegisteredContacts(Contacts request);
-        Dictionary<Guid,string> GetGCMClientIds(IEnumerable<Guid> userIds);
+        Task<IEnumerable<RegisteredContact>> GetRegisteredContacts(Contacts request);
+        Task<Dictionary<Guid,string>> GetGCMClientIds(IEnumerable<Guid> userIds);
     }
 }

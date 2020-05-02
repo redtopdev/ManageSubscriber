@@ -3,9 +3,10 @@ namespace Subscriber.Service
 {
     using Subscriber.DataContract;
     using System;
+    using System.Threading.Tasks;
 
     public interface IProfileManager
     {
-        Guid RegisterUserProfile(UserProfile profile);
+        Task<Guid> RegisterUserProfile(UserProfile profile);
     }
 }

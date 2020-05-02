@@ -3,6 +3,8 @@ using Microsoft.Extensions.Logging;
 using Subscriber.DataContract;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Subscriber.Service
 {
@@ -20,23 +22,24 @@ namespace Subscriber.Service
         }
 
         [HttpGet("users/registered")]
-        public IActionResult Get(Contacts contacts)
+        public async Task<IActionResult> GetRegisteredContacts(Contacts contacts)
         {
             logger.LogInformation("Fetching Registered Contacts");
 
             //put try catch only when you want to return custom message or status code, else this will
             //be caught in ExceptionHandling middleware so no need to put try catch here
 
-            return Ok(contactsManager.GetRegisteredContacts(contacts));
+            return Ok(await contactsManager.GetRegisteredContacts(contacts));
         }
 
         [HttpGet("users/gmcclientid")]
 
-        public IActionResult GetGCMClientIds([FromQuery(Name = "userIds")]IEnumerable<Guid> userIds)
+        public async Task<IActionResult> GetGCMClientIds([FromQuery(Name = "userIds")]IEnumerable<Guid> userIds)
         {
             logger.LogInformation("Fetching GCM ClientIds");
-
-            return Ok(contactsManager.GetGCMClientIds(userIds));
+            var result = await contactsManager.GetGCMClientIds(userIds);
+            //Dictionary is not supported as returned value
+            return Ok(result.Keys.Select(key => new { UserId = key, GcmClientId = result[key] }));
         }
     }
 }

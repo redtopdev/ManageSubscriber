@@ -21,7 +21,7 @@ namespace Subscriber.Service
             services.ConfigureCloudCassandra(Configuration);
             services.AddTransient<IProfileManager, ProfileManager>();
             services.AddTransient<IContactsManager, ContactsManager>();
-            services.AddTransient<IRepository, CassandraRepository>();
+            services.AddTransient<IUserProfileRepository, UserProfileRepository>();
         }
 
         public override void ConfigureComponent(IApplicationBuilder app)

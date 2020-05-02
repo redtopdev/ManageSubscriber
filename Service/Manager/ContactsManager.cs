@@ -5,13 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Subscriber.Service
 {
     public class ContactsManager : IContactsManager
     {
-        private IRepository repo;
-        public ContactsManager(IRepository repo)
+        private IUserProfileRepository repo;
+        public ContactsManager(IUserProfileRepository repo)
         {
             this.repo = repo;
         }
@@ -20,10 +21,10 @@ namespace Subscriber.Service
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public IEnumerable<RegisteredContact> GetRegisteredContacts(Contacts request)
+        public async Task<IEnumerable<RegisteredContact>> GetRegisteredContacts(Contacts request)
         {
             //this will be probalematic when the number of users grow
-            List<PhoneContact> registeredList = repo.GetRegisteredUsers();
+            List<PhoneContact> registeredList = await repo.GetRegisteredUsers();
             List<PhoneContact> phoneContactList = new List<PhoneContact>();
 
             request.ContactList.ForEach(phoneNumber => phoneContactList.Add(ParseNumber(phoneNumber, request.RequestorCountryCode)));
@@ -65,15 +66,9 @@ namespace Subscriber.Service
             return pc;
         }
 
-        public Dictionary<Guid, string> GetGCMClientIds(IEnumerable<Guid> userIds)
+        public async Task<Dictionary<Guid, string>> GetGCMClientIds(IEnumerable<Guid> userIds)
         {
-            var result = new Dictionary<Guid, string>();
-            userIds.ToList().ForEach(userid =>
-            {
-                result.Add(userid, "2weds3f");
-            });
-
-            return result;
+            return await repo.GetGCMClientIds(userIds);
         }
     }
 }

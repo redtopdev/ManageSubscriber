@@ -7,6 +7,7 @@ namespace Subscriber.Service
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using Subscriber.DataContract;
+    using System.Threading.Tasks;
 
     [ApiController]
     [Route("user/register")]
@@ -21,14 +22,15 @@ namespace Subscriber.Service
         }
 
         [HttpPost]
-        public IActionResult Post(UserProfile profile)
+        public async Task<IActionResult> Post(UserProfile profile)
         {
             logger.LogInformation("Saving Profile");
 
             //put try catch only when you want to return custom message or status code, else this will
             //be caught in ExceptionHandling middleware so no need to put try catch here
 
-            return Ok(profileManager.RegisterUserProfile(profile));
+
+            return Ok(await profileManager.RegisterUserProfile(profile));
         }
     }
 }

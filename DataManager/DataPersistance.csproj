@@ -11,10 +11,4 @@
     <ProjectReference Include="..\DataContract\DataContract.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="secure-connect-engaze.zip">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
