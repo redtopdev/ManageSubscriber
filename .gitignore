@@ -6,11 +6,11 @@
 *.user
 *.userosscache
 *.sln.docstates
-Logs
+Logs/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-RegisterAPI/Logs
+ManageSubscriber/Service/Logs/
 
 # Build results
 [Dd]ebug/

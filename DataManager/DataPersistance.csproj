@@ -8,6 +8,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\DataContract\DataContract.csproj" />
-		<PackageReference Include="Engaze.Core.Persistance.Cassandra" Version="1.0.16-alpha" />
+		<PackageReference Include="Engaze.Core.Persistance.Cassandra" Version="$(EngazeCore)" />
 	</ItemGroup>
 </Project>
