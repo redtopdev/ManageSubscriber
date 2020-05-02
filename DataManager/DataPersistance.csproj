@@ -1,17 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>Register.DataPersistance</AssemblyName>
-    <RootNamespace>Register.DataManager</RootNamespace>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>Subscriber.DataPersistance</AssemblyName>
+    <RootNamespace>Subscriber.DataPersistance</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Engaze.Core.Persistance.Cassandra" Version="1.0.5-alpha" />
+    <ProjectReference Include="..\..\Core\Engaze.Core.Persistance.Cassandra\Engaze.Core.Persistance.Cassandra.csproj" />
+    <ProjectReference Include="..\DataContract\DataContract.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DataContract\DataContract.csproj" />
+    <None Update="secure-connect-engaze.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

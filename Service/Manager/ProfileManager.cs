@@ -4,7 +4,7 @@ namespace Subscriber.Service
     using System;
 
     using Subscriber.DataContract;
-    using Subscriber.DataManager;
+    using Subscriber.DataPersistance;
     
     public class ProfileManager : IProfileManager
     {

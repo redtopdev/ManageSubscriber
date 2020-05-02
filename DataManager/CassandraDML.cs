@@ -2,7 +2,7 @@
 /// Developer: ShyamSk
 /// </summary>
 
-namespace Subscriber.DataManager
+namespace Subscriber.DataPersistance
 {
     internal class CassandraDML
     {

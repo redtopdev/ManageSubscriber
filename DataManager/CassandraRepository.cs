@@ -2,7 +2,7 @@
 /// Developer: ShyamSk
 /// </summary>
 
-namespace Subscriber.DataManager
+namespace Subscriber.DataPersistance
 {
     using Engaze.Core.Persistance.Cassandra;
     using Microsoft.Extensions.Logging;

@@ -2,7 +2,7 @@
 /// Developer: ShyamSk
 /// </summary>
 
-namespace Subscriber.DataManager
+namespace Subscriber.DataPersistance
 {
     using Subscriber.DataContract;
     using System;

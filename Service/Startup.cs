@@ -8,7 +8,7 @@ namespace Subscriber.Service
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Subscriber.DataManager;
+    using Subscriber.DataPersistance;
     using Serilog;
 
     public class Startup : EngazeStartup
@@ -18,7 +18,7 @@ namespace Subscriber.Service
         public override void ConfigureComponentServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.ConfigureCassandraServices(Configuration);
+            services.ConfigureCloudCassandra(Configuration);
             services.AddTransient<IProfileManager, ProfileManager>();
             services.AddTransient<IContactsManager, ContactsManager>();
             services.AddTransient<IRepository, CassandraRepository>();
