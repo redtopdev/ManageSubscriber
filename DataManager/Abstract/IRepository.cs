@@ -2,9 +2,9 @@
 /// Developer: ShyamSk
 /// </summary>
 
-namespace Register.DataManager
+namespace Subscriber.DataManager
 {
-    using Register.DataContract;
+    using Subscriber.DataContract;
     using System;
     using System.Collections.Generic;
 

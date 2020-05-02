@@ -2,7 +2,7 @@
 /// Developer: ShyamSk
 /// </summary>
 
-namespace Register.Service
+namespace Subscriber.Service
 {
     public class Program
     {

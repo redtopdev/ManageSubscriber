@@ -1,14 +1,14 @@
 /// <summary>
 /// Developer: ShyamSk
 /// </summary>
-namespace Register.Service
+namespace Subscriber.Service
 {
     using Engaze.Core.Persistance.Cassandra;
     using Engaze.Core.Web;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Register.DataManager;
+    using Subscriber.DataManager;
     using Serilog;
 
     public class Startup : EngazeStartup

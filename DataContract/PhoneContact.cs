@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace Register.DataContract
+namespace Subscriber.DataContract
 {
     public class PhoneContact
     {

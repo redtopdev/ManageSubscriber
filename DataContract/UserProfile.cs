@@ -2,7 +2,7 @@
 /// Developer: ShyamSk
 /// </summary>
 
-namespace Register.DataContract
+namespace Subscriber.DataContract
 {
     using System;
 

@@ -1,7 +1,7 @@
 ﻿
-namespace Register.Service
+namespace Subscriber.Service
 {
-    using Register.DataContract;
+    using Subscriber.DataContract;
     using System;
 
     public interface IProfileManager

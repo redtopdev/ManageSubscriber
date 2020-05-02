@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>Register.Service</AssemblyName>
-    <RootNamespace>Register.Service</RootNamespace>
+    <AssemblyName>Subscriber.Service</AssemblyName>
+    <RootNamespace>Subscriber.Service</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

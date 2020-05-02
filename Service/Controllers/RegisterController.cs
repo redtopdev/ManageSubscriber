@@ -2,13 +2,11 @@
 /// Developer: ShyamSk
 /// </summary>
 
-namespace Register.Service
+namespace Subscriber.Service
 {
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
-    using Register.DataContract;
-    using System;
-    using System.Data;
+    using Subscriber.DataContract;
 
     [ApiController]
     [Route("user/register")]

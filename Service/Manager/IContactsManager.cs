@@ -1,7 +1,7 @@
-﻿using Register.DataContract;
+﻿using Subscriber.DataContract;
 using System.Collections.Generic;
 
-namespace Register.Service
+namespace Subscriber.Service
 {
     public interface IContactsManager
     {
@@ -10,6 +10,6 @@ namespace Register.Service
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        IEnumerable<RegisteredContact> GetRegisteredContacts(ContactsRequest request);
+        IEnumerable<RegisteredContact> GetRegisteredContacts(Contacts request);
     }
 }

@@ -1,12 +1,12 @@
 ﻿using PhoneNumbers;
-using Register.DataContract;
-using Register.DataManager;
+using Subscriber.DataContract;
+using Subscriber.DataManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Register.Service
+namespace Subscriber.Service
 {
     public class ContactsManager : IContactsManager
     {
@@ -20,7 +20,7 @@ namespace Register.Service
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        public IEnumerable<RegisteredContact> GetRegisteredContacts(ContactsRequest request)
+        public IEnumerable<RegisteredContact> GetRegisteredContacts(Contacts request)
         {
             //this will be probalematic when the number of users grow
             List<PhoneContact> registeredList = repo.GetRegisteredUsers();

@@ -2,11 +2,11 @@
 /// Developer: ShyamSk
 /// </summary>
 
-namespace Register.DataManager
+namespace Subscriber.DataManager
 {
     using Engaze.Core.Persistance.Cassandra;
     using Microsoft.Extensions.Logging;
-    using Register.DataContract;
+    using Subscriber.DataContract;
     using System;
     using System.Collections.Generic;
 

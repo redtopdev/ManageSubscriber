@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Register.DataContract
+namespace Subscriber.DataContract
 {
 
-    public class ContactsRequest
+    public class Contacts
     {
         public List<string> ContactList { get; set; }      
         public string RequestorCountryCode { get; set; }

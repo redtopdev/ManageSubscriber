@@ -1,10 +1,10 @@
 ﻿
-namespace Register.Service
+namespace Subscriber.Service
 {
     using System;
 
-    using Register.DataContract;
-    using Register.DataManager;
+    using Subscriber.DataContract;
+    using Subscriber.DataManager;
     
     public class ProfileManager : IProfileManager
     {
