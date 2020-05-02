@@ -26,12 +26,12 @@ namespace Subscriber.Service
             List<PhoneContact> registeredList = repo.GetRegisteredUsers();
             List<PhoneContact> phoneContactList = new List<PhoneContact>();
 
-            request.ContactList.ForEach(phoneNumber => phoneContactList.Add(ParseNumber(phoneNumber, request.RequestorCountryCode)));          
-           
-            return  from pc in phoneContactList
-                       join rc in registeredList
-                       on new { pc.MobileNumber, pc.CountryCode }  equals new { rc.MobileNumber, rc.CountryCode }
-                       select new RegisteredContact() { UserId = rc.UserId, MobileNumberStoredInRequestorPhone= pc.MobileNumberStoredInRequestorPhone };          
+            request.ContactList.ForEach(phoneNumber => phoneContactList.Add(ParseNumber(phoneNumber, request.RequestorCountryCode)));
+
+            return from pc in phoneContactList
+                   join rc in registeredList
+                   on new { pc.MobileNumber, pc.CountryCode } equals new { rc.MobileNumber, rc.CountryCode }
+                   select new RegisteredContact() { UserId = rc.UserId, MobileNumberStoredInRequestorPhone = pc.MobileNumberStoredInRequestorPhone };
         }
 
         /// <summary>
@@ -54,15 +54,26 @@ namespace Subscriber.Service
                 }
                 region = phoneNumberUtil.GetRegionCodeForCountryCode(countryCode);
                 var phoneNumber = phoneNumberUtil.Parse(number, region);
-                
+
                 pc.CountryCode = "+" + phoneNumber.CountryCode.ToString();
                 pc.MobileNumber = phoneNumber.NationalNumber.ToString();
 
-            } 
-            catch 
-            { 
+            }
+            catch
+            {
             }
             return pc;
+        }
+
+        public Dictionary<Guid, string> GetGCMClientIds(IEnumerable<Guid> userIds)
+        {
+            var result = new Dictionary<Guid, string>();
+            userIds.ToList().ForEach(userid =>
+            {
+                result.Add(userid, "2weds3f");
+            });
+
+            return result;
         }
     }
 }

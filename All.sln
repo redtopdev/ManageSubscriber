@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataPersistance", "DataMana
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataContract", "DataContract\DataContract.csproj", "{58D94B2B-3812-4FD7-B8DA-9DAD4184459D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engaze.Core.Web", "..\Core\Engaze.Core.Web\Engaze.Core.Web.csproj", "{368FE8D1-D8B7-415A-BF1B-7C3DEED8E28E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{58D94B2B-3812-4FD7-B8DA-9DAD4184459D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58D94B2B-3812-4FD7-B8DA-9DAD4184459D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58D94B2B-3812-4FD7-B8DA-9DAD4184459D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{368FE8D1-D8B7-415A-BF1B-7C3DEED8E28E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{368FE8D1-D8B7-415A-BF1B-7C3DEED8E28E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{368FE8D1-D8B7-415A-BF1B-7C3DEED8E28E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{368FE8D1-D8B7-415A-BF1B-7C3DEED8E28E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

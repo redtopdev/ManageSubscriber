@@ -34,11 +34,9 @@ namespace Subscriber.Service
 
         public IActionResult GetGCMClientIds([FromQuery(Name = "userIds")]IEnumerable<Guid> userIds)
         {
-            List<string> gcmids = new List<string>();
-            gcmids.Add("Atul");
-            gcmids.Add("shyam");
-            return Ok(gcmids);
+            logger.LogInformation("Fetching GCM ClientIds");
 
+            return Ok(contactsManager.GetGCMClientIds(userIds));
         }
     }
 }

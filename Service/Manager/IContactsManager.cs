@@ -1,4 +1,5 @@
 ﻿using Subscriber.DataContract;
+using System;
 using System.Collections.Generic;
 
 namespace Subscriber.Service
@@ -11,5 +12,6 @@ namespace Subscriber.Service
         /// <param name="request"></param>
         /// <returns></returns>
         IEnumerable<RegisteredContact> GetRegisteredContacts(Contacts request);
+        Dictionary<Guid,string> GetGCMClientIds(IEnumerable<Guid> userIds);
     }
 }
