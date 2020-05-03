@@ -10,7 +10,7 @@ namespace Subscriber.Service
     using System.Threading.Tasks;
 
     [ApiController]
-    [Route("user/register")]
+    [Route("users/register")]
     public class RegisterController : ControllerBase
     {
         private ILogger<RegisterController> logger;
