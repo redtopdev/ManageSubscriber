@@ -21,7 +21,7 @@ namespace Subscriber.Service
             this.contactsManager = contactsManager;
         }
 
-        [HttpGet("users/registered")]
+        [HttpGet("user/registered")]
         public async Task<IActionResult> GetRegisteredContacts(Contacts contacts)
         {
             logger.LogInformation("Fetching Registered Contacts");
@@ -32,7 +32,7 @@ namespace Subscriber.Service
             return Ok(await contactsManager.GetRegisteredContacts(contacts));
         }
 
-        [HttpGet("users/gmcclientid")]
+        [HttpGet("user/gmcclientid")]
 
         public async Task<IActionResult> GetGCMClientIds([FromQuery(Name = "userIds")]IEnumerable<Guid> userIds)
         {
