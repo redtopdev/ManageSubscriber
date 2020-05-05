@@ -32,7 +32,7 @@ namespace Subscriber.Service
             return Ok(await contactsManager.GetRegisteredContacts(contacts));
         }
 
-        [HttpGet("users/gmcclientid")]
+        [HttpGet("users/gcmclientid")]
 
         public async Task<IActionResult> GetGCMClientIds([FromQuery(Name = "userIds")]IEnumerable<Guid> userIds)
         {
