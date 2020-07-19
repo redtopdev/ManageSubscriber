@@ -21,7 +21,7 @@ namespace Subscriber.Service
             this.contactsManager = contactsManager;
         }
 
-        [HttpGet("users/registered")]
+        [HttpPost("users/registered")]
         public async Task<IActionResult> GetRegisteredContacts(Contacts contacts)
         {
             logger.LogInformation("Fetching Registered Contacts");
