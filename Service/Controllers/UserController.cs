@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Subscriber.DataContract;
 using System;
@@ -28,8 +29,22 @@ namespace Subscriber.Service
 
             //put try catch only when you want to return custom message or status code, else this will
             //be caught in ExceptionHandling middleware so no need to put try catch here
-
-            return Ok(await contactsManager.GetRegisteredContacts(contacts));
+            try
+            {
+                var res = (await contactsManager.GetRegisteredContacts(contacts));
+                if (null != res)
+                {
+                    return Ok(new { ListOfRegisteredContact = res });
+                }
+                else
+                {
+                    return Ok(new { ListOfRegisteredContact = Enumerable.Empty<RegisteredContact>() });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
 
         [HttpGet("users/gcmclientid")]
