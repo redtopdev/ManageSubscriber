@@ -30,7 +30,7 @@ namespace Subscriber.Service
             //be caught in ExceptionHandling middleware so no need to put try catch here
 
 
-            return Ok(await profileManager.RegisterUserProfile(profile));
+            return Ok(new { Id = await profileManager.RegisterUserProfile(profile) });
         }
     }
 }
