@@ -49,8 +49,23 @@ namespace Subscriber.DataPersistance
             try
             {
                 var session = sessionCacheManager.GetSession(keySpace);
-                var preparedStatement = session.Prepare(CassandraDML.InsertStatement);
-                var statement = preparedStatement.Bind(userId, profile.GCMClientId, profile.ProfileName,
+                //Get existing users
+                var preparedStatement = session.Prepare(CassandraDML.SelectAllUserProfiles);
+                var resultSet = await session.ExecuteAsync(preparedStatement.Bind());
+                logger.LogInformation("Found results.");
+                foreach (var res in resultSet)
+                {
+                    Guid UserId = res.GetValue<System.Guid>("userid");
+                    string CountryCode = res.GetValue<string>("countrycode");
+                    string MobileNumber = res.GetValue<string>("mobilenumber");
+                    if (profile.MobileNumber == MobileNumber && profile.CountryCode == CountryCode)
+                    {
+                        return UserId;
+                    }
+                }
+                //Insert record if new record
+                var preparedStatementInsert = session.Prepare(CassandraDML.InsertStatement);
+                var statement = preparedStatementInsert.Bind(userId, profile.GCMClientId, profile.ProfileName,
                     profile.ImageUrl, profile.CountryCode, profile.MobileNumber, profile.IsDeleted,
                     profile.CreatedOn);
 
