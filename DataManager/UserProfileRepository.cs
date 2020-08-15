@@ -64,6 +64,7 @@ namespace Subscriber.DataPersistance
                     }
                 }
                 //Insert record if new record
+                profile.CreatedOn = DateTime.UtcNow.ToUniversalTime();
                 var preparedStatementInsert = session.Prepare(CassandraDML.InsertStatement);
                 var statement = preparedStatementInsert.Bind(userId, profile.GCMClientId, profile.ProfileName,
                     profile.ImageUrl, profile.CountryCode, profile.MobileNumber, profile.IsDeleted,
